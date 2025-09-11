@@ -6,12 +6,12 @@ class Node
 
   attr_accessor :data, :left, :right
 
-  def <=>(other)
-    data <=> other.data
-  end
+  # def <=>(other)
+  #   data <=> other.data
+  # end
 
-  def initialize
-    @data = nil
+  def initialize(data = nil)
+    @data = data
     @left = nil
     @right = nil
   end
