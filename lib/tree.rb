@@ -19,7 +19,7 @@ class Tree
 
     mid = (start + size) / 2
     new_node = Node.new(array[mid])
-    puts "node.data: #{new_node.data}"
+    # puts "node.data: #{new_node.data}"
     @nodes << new_node
     # left = array[0..(mid - 1)]
     # left&.each { |x| print x }
@@ -30,6 +30,29 @@ class Tree
     new_node
   end
 
+  def insert(value, node = @root)
+    return puts 'Value already present in the Tree' if value == node.data
+
+    if node.data.nil?
+      new_node = Node.new(value)
+      @nodes << new_node
+    elsif value < node.data
+      if node.left.nil?
+        new_node = Node.new(value)
+        @nodes << new_node
+        node.left = new_node
+      else
+        insert(value, node.left)
+      end
+    elsif node.right.nil?
+      new_node = Node.new(value)
+      @nodes << new_node
+      node.right = new_node
+    else
+      insert(value, node.right)
+    end
+  end
+
   def to_s(node = @root, prefix = '', is_left = true)
     # puts "node.data: #{node.data}"
     # puts "nodes: #{@nodes}"
@@ -38,7 +61,7 @@ class Tree
     # puts "pp prefix: #{prefix}"
     # puts "pp is_left: #{is_left}"
     # https :/ / docs.rubocop.org / rubocop / cops_style.html # styleoptionalbooleanparameter
-    # puts "node right: #{node.right == true }"    
+    # puts "node right: #{node.right == true }"
     to_s(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     to_s(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
