@@ -51,7 +51,7 @@ class Tree
   #   deleted_node.left = new_node.left
   # end
 
-  def delete(value, node = @root)
+  def delete(value, node = root)
     return node if node.nil?
 
     if value < node.data
@@ -67,6 +67,12 @@ class Tree
       node.right = delete(leftmost_node.data, node.right)
     end
     node
+  end
+
+  def find(value, node = root)
+    return node if node.nil? || node.data == value
+
+    value < node.data ? find(value, node.left) : find(value, node.right)
   end
 
   #   elsif value == node.data

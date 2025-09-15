@@ -27,3 +27,4 @@ puts tree
 # puts tree.nodes.one?(7)
 tree.delete(8)
 puts tree
+puts tree.find(9).data
