@@ -10,7 +10,7 @@ class Node
   #   data <=> other.data
   # end
 
-  def initialize(data = nil)
+  def initialize(data)
     @data = data
     @left = nil
     @right = nil
