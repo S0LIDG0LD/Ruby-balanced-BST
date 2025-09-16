@@ -28,3 +28,5 @@ puts tree
 tree.delete(8)
 puts tree
 puts tree.find(9).data
+
+puts tree.level_order

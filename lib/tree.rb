@@ -75,29 +75,25 @@ class Tree
     value < node.data ? find(value, node.left) : find(value, node.right)
   end
 
-  #   elsif value == node.data
-  #     if leaf_node?(node)
-  #       nil
-  #       puts 'value == node.data'
-  #     elsif right_child_only?(node)
-  #       swap_node(node, node.right)
-  #     elsif left_child_only?(node)
-  #       swap_node(node, node.right)
-  #     elsif node_both_children?(node)
-  #       # left_tree = node.left
-  #       # left_tree = left_tree.right until left_tree.right.nil?
-  #       # node.data = letf_tree.value
-  #       # delete
-  #     end
-  #     @nodes.delete(value)
-  #     nil
-  #   elsif leaf_node?(node)
-  #     nil
-  #   else
-  #     node = delete(value, node.left) unless right_child_only?(node)
-  #     node = delete(value, node.right) unless left_child_only?(node)
-  #   end
+  # def level_order(node = root, queue = [])
+  #   print "#{node.data} "
+  #   queue << node.left unless node.left.nil?
+  #   queue << node.right unless node.right.nil?
+  #   return if queue.empty?
+
+  #   level_order(queue.shift, queue)
   # end
+
+  def level_order(node = root, queue = [], array = [])
+    # return array if (node_right.nil? && node_left.nil?)
+
+    array << node.data unless node.data.nil?
+    queue << node.left unless node.left.nil?
+    queue << node.right unless node.right.nil?
+    return array if queue.empty?
+
+    level_order(queue.shift, queue, array)
+  end
 
   def to_s(node = @root, prefix = '', is_left = true)
     to_s(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
