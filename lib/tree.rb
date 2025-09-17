@@ -69,19 +69,17 @@ class Tree
     node
   end
 
-  def height(value, node = root, height = 0, queue = [])
-    if !node.nil? && (value == node.data || height.positive?)
-      queue << node.left if value < node.data && !node.left.nil?
-      queue << node.right if value > node.data && !node.right.nil?
-      return (height.zero? ? nil : height) if queue.empty?
+  def height(value, node = root, height = 0, found = false, heights = [])
+    return heights << (found ? height : nil) if node.nil?
 
+    if value == node.data
+      found = true
+    elsif found
       height += 1
-      height(value, queue.shift, height, queue)
-    else
-      height(value, node.left, height, queue) unless node.left.nil?
-      height(value, node.right, height, queue) unless node.right.nil?
     end
-    height
+    height(value, node.left, height, found, heights) if value < node.data || found
+    height(value, node.right, height, found, heights) if value > node.data || found
+    heights.max
   end
 
   def depth(value, height = 1, queue = [], node = root)

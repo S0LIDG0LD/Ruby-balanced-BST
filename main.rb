@@ -30,8 +30,9 @@ tree.delete(6)
 tree.delete(8)
 puts tree
 # puts tree.find(9).data
-puts 'height 9, 5, 10, 15, 50: '
+puts 'height 9, 4, 10, 15, 51: '
 puts tree.height(9)
+# puts tree.depth(70)
 puts tree.height(4)
 puts tree.height(10)
 puts tree.height(15)
@@ -44,5 +45,7 @@ puts tree.height(51)
 # puts tree.preorder
 # puts 'postorder'
 # puts tree.postorder
+puts tree.balanced?
 tree.rebalance
 puts tree
+puts tree.balanced?
