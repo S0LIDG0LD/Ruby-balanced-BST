@@ -69,6 +69,21 @@ class Tree
     node
   end
 
+  def height(value, node = root, height = 0, queue = [])
+    if !node.nil? && (value == node.data || height.positive?)
+      queue << node.left if value < node.data && !node.left.nil?
+      queue << node.right if value > node.data && !node.right.nil?
+      return (height.zero? ? nil : height) if queue.empty?
+
+      height += 1
+      height(value, queue.shift, height, queue)
+    else
+      height(value, node.left, height, queue) unless node.left.nil?
+      height(value, node.right, height, queue) unless node.right.nil?
+    end
+    height
+  end
+
   def depth(value, height = 1, queue = [], node = root)
     return height if value == node.data
 
@@ -87,8 +102,6 @@ class Tree
   end
 
   def level_order(node = root, queue = [], array = [])
-    # return array if (node_right.nil? && node_left.nil?)
-
     array << node.data unless node.data.nil?
     queue << node.left unless node.left.nil?
     queue << node.right unless node.right.nil?
@@ -118,6 +131,9 @@ class Tree
     array
   end
 
+  def rebalance
+    @root = build_tree(inorder)
+  end
   # def preorder(node = root, array = [])
   #   return nil if node.nil?
 
