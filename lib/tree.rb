@@ -134,6 +134,14 @@ class Tree
   def rebalance
     @root = build_tree(inorder)
   end
+
+  def balanced?(node = root)
+    return true if node.nil?
+
+    left_height = (node.left.nil? ? 0 : height(node.left.data, node.left))
+    right_height = (node.right.nil? ? 0 : height(node.right.data, node.right))
+    (left_height - right_height).abs < 2 && balanced?(node.left) && balanced?(node.right)
+  end
   # def preorder(node = root, array = [])
   #   return nil if node.nil?
 
