@@ -28,5 +28,11 @@ puts tree
 tree.delete(8)
 puts tree
 puts tree.find(9).data
-
-puts tree.level_order
+# puts 'level order:'
+# puts tree.level_order
+# puts 'inorder'
+puts tree.inorder
+# puts 'preorder'
+# puts tree.preorder
+puts 'postorder'
+# puts tree.postorder

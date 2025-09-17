@@ -75,15 +75,6 @@ class Tree
     value < node.data ? find(value, node.left) : find(value, node.right)
   end
 
-  # def level_order(node = root, queue = [])
-  #   print "#{node.data} "
-  #   queue << node.left unless node.left.nil?
-  #   queue << node.right unless node.right.nil?
-  #   return if queue.empty?
-
-  #   level_order(queue.shift, queue)
-  # end
-
   def level_order(node = root, queue = [], array = [])
     # return array if (node_right.nil? && node_left.nil?)
 
@@ -94,6 +85,43 @@ class Tree
 
     level_order(queue.shift, queue, array)
   end
+
+  def inorder(node = root, array = [])
+    inorder(node.left, array) unless node.left.nil?
+    array << node.data unless node.nil?
+    inorder(node.right, array) unless node.right.nil?
+    array
+  end
+
+  def preorder(node = root, array = [])
+    array << node.data unless node.nil?
+    preorder(node.left, array) unless node.left.nil?
+    preorder(node.right, array) unless node.right.nil?
+    array
+  end
+
+  def postorder(node = root, array = [])
+    postorder(node.left, array) unless node.left.nil?
+    postorder(node.right, array) unless node.right.nil?
+    array << node.data unless node.nil?
+    array
+  end
+
+  # def preorder(node = root, array = [])
+  #   return nil if node.nil?
+
+  #   array << node.data unless node.nil?
+  #   preorder(node.left, array) unless node.left.nil?
+  #   preorder(node.right, array) unless node.left.nil?
+  #   array
+  # end
+
+  # def postorder(node = root, array = [])
+  #   postorder(node.left, array) unless node.left.nil?
+  #   postorder(node.right, array) unless node.left.nil?
+  #   array << node.data unless node.nil?
+  #   array
+  # end
 
   def to_s(node = @root, prefix = '', is_left = true)
     to_s(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
